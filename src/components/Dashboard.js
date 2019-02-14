@@ -6,10 +6,25 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Question />
+        <ul className='dashboard-list'>
+          {
+            this.props.questionIds.map((id) => (
+              <li key={id}>
+                <Question id={id} />
+              </li>
+            ))
+          }
+        </ul>      
       </div>
     )
   }
 }
 
-export default Dashboard
+function mapStateToProps({ questions }) {
+  return {
+    questionIds: Object.keys(questions)
+      .sort((a, b) => questions[b].timestamp - questions[a].timestamp) 
+  }
+}
+
+export default connect(mapStateToProps)(Dashboard)
