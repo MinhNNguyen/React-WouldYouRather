@@ -10,12 +10,16 @@ class User extends Component {
     }
 
     const { name, answers, questions } = user 
-    console.log(answers)
-    console.log(questions)
+    const answered = Object.keys(answers).length
+    const created = questions.length
+    const score  = answered + created
     
     return (
       <div>
-        {name}
+        {name} <br />
+        Questions Answered: {answered} <br />
+        Questions Created: {created} <br />
+        Score: {score}
       </div>
     )
   }
