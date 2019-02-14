@@ -26,6 +26,7 @@ li {
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
+  border: 1px solid black;
 }
 
 .question-header {
@@ -59,4 +60,10 @@ li {
   border: 1px solid black;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.option {
+  width: 100%;
+  border-radius: 2px;
+  border: 0;
 }

@@ -11,7 +11,7 @@ class Question extends Component {
     }
 
     const { name, id, timestamp, avatar, optionOne, optionTwo } = question 
-    console.log(question)
+
     return (
       <div className="question">
         <div className="question-header">   
