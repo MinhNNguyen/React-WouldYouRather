@@ -5,6 +5,7 @@ import { handleInitialData } from '../actions/shared'
 import NewQuestion from './NewQuestion'
 import Leaderboard from './Leaderboard'
 import SignInPage from './SignInPage'
+import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <LoadingBar />
         {this.props.loading === true 
         ? null
         : <div className="App">

@@ -10,9 +10,13 @@ class AnsweredQuestion extends Component {
       return <p> This question does not exist </p>
     }
 
-    const { name, id, timestamp, avatar, optionOne, optionTwo } = question 
-    const firstVoteNumber = Object.keys(optionOne).length
-    const secondVoteNumber = Object.keys(optionTwo).length
+    const { id, name, avatar, timestamp, optionOne, optionTwo } = question 
+    const firstVoteNumber = optionOne.votes.length 
+      ? optionOne.votes.length
+      : 0
+    const secondVoteNumber = optionTwo.votes.length 
+      ? optionTwo.votes.length
+      : 0
     const totalVoteNumber = firstVoteNumber + secondVoteNumber 
 
     return (
@@ -45,7 +49,7 @@ function mapStateToProps({authedUser, users, questions}, { id }) {
   return {
     authedUser,
     question: question
-      ? formatQuestion(question, users[question.author], authedUser)
+      ? formatQuestion(question, users[question.author])
       : null
   }
 }

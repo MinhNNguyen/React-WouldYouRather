@@ -1,8 +1,34 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion, formatDate } from '../utils/helpers'
+import { handleAnswerQuestion } from '../actions/questions'
 
 class UnansweredQuestion extends Component {
+
+  state = {
+    selectedOption: '',
+    toAnsweredQuestion: false
+  }
+
+  handleOptionChange = (e) => {
+    this.setState({
+      ...this.state,
+      selectedOption: e.target.value
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const { dispatch, question, authedUser } = this.props
+    const { selectedOption } = this.state
+
+    dispatch(handleAnswerQuestion({
+      authedUser,
+      qid: question.id,
+      answer: selectedOption
+    }))
+  }
+
   render() {
     const { question } = this.props
 
@@ -10,7 +36,7 @@ class UnansweredQuestion extends Component {
       return <p> This question does not exist </p>
     }
 
-    const { name, id, timestamp, avatar, optionOne, optionTwo } = question 
+    const { id, name, avatar, timestamp, optionOne, optionTwo } = question 
 
     return (
       <div className="question">
@@ -27,10 +53,18 @@ class UnansweredQuestion extends Component {
         </div>
         <div className='question-body'>
           <h3>Would You Rather ..</h3>
-          <form>
-            <input type="radio" name="answer" value="o1" />{optionOne.text} <br />
-            <input type="radio" name="answer" value="o2" />{optionTwo.text} <br />
-            <button type="submit" name="submit">Submit</button> 
+          <form className="submit-answer" onSubmit={this.handleSubmit}>
+            <input type="radio" 
+                   value="optionOne" 
+                   checked={this.state.selectedOption === 'optionOne'}
+                   onChange={this.handleOptionChange}/>
+            {optionOne.text} <br />
+            <input type="radio" 
+                   value="optionTwo" 
+                   checked={this.state.selectedOption === 'optionTwo'}
+                   onChange={this.handleOptionChange}/>
+            {optionTwo.text} <br />
+            <button type="submit">Submit</button> 
           </form>
         </div>
       </div>
@@ -43,7 +77,7 @@ function mapStateToProps({authedUser, users, questions}, { id }) {
   return {
     authedUser,
     question: question
-      ? formatQuestion(question, users[question.author], authedUser)
+      ? formatQuestion(question, users[question.author])
       : null
   }
 }
