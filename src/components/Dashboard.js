@@ -20,7 +20,7 @@ class Dashboard extends Component {
     const { showing } = this.state
 
     return (
-      <div className="col-sm-9 col-md-7 col-lg-5 mx-auto dashboard">
+      <div className="col-sm-11 col-md-9 col-lg-7 mx-auto dashboard">
         <Nav 
           fill
           variant="tabs"

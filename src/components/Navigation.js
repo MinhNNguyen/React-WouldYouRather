@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { handleSignOut } from '../actions/authedUser'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { withRouter, NavLink } from 'react-router-dom'
 
 class Navigation extends Component {
 
   render() {
-    const { authedUser } = this.props
+    const { loggedUser } = this.props
 
     if ( this.props.location.pathname === '/signin') {
       return <div></div>
@@ -36,14 +33,24 @@ class Navigation extends Component {
           to="/signout">
           Sign Out
         </NavLink>
+        <NavLink
+          className="app-nav-item app-nav-last-item"
+          to="#">
+          {loggedUser.name}
+          <img 
+            src={loggedUser.avatarURL}
+            alt={`Avatar of ${loggedUser.name}`}
+            className='app-nav-avatar'
+          />
+        </NavLink>
       </div>
     )
   }
 } 
 
-function mapStateToProps({dispatch}) {
+function mapStateToProps({users, authedUser}) {
   return {
-    dispatch
+    loggedUser: users[authedUser] 
   }
 }
 

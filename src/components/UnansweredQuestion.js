@@ -42,7 +42,6 @@ class UnansweredQuestion extends Component {
     const { id, name, avatar, timestamp, optionOne, optionTwo } = question 
 
     return (
-      <Link className="question-link" to={`/question/${id}`}>
         <div>
           <div className="card card-question my-2">
             <div className="card-body">
@@ -53,7 +52,11 @@ class UnansweredQuestion extends Component {
                   className='avatar'
                 />
                 <div className="header-info">
-                  <span>{name}'s question</span>
+                  <span>
+                    <Link className="question-link" to={`/question/${id}`}>
+                      {name}'s question
+                    </Link>
+                  </span>
                   <div>at {formatDate(timestamp)}</div> 
                 </div>
               </div>   
@@ -86,7 +89,6 @@ class UnansweredQuestion extends Component {
             </div>
           </div>
         </div>
-      </Link>
     )
   }
 }

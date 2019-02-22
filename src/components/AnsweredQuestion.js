@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import { formatQuestion, formatDate } from '../utils/helpers'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import { withRouter, Link } from 'react-router-dom'
+import { MdStar } from 'react-icons/md'
 
 class AnsweredQuestion extends Component {
   render() {
-    const { question } = this.props
+    const { question, authedUser } = this.props
 
     if (question === null) {
       return <p> This question does not exist </p>
@@ -23,8 +24,9 @@ class AnsweredQuestion extends Component {
     const firstVotePercentage = parseFloat(100 * firstVoteNumber / totalVoteNumber).toFixed(2)
     const secondVotePercentage = parseFloat(100 * secondVoteNumber / totalVoteNumber).toFixed(2)
 
+    const isOptionOneSelected = optionOne.votes.includes(authedUser)
+
     return (
-      <Link className="question-link" to={`/question/${id}`}>
       <div>
         <div className="card card-question my-2">
           <div className="card-body">
@@ -36,24 +38,41 @@ class AnsweredQuestion extends Component {
                 className='avatar'
               />
               <div className="header-info">
-                <span>{name}'s question</span>
+                <span>
+                  <Link className="question-link" to={`/question/${id}`}>
+                    {name}'s question
+                  </Link>
+                </span>
                 <div>at {formatDate(timestamp)}</div> 
               </div>
             </div>
             <div className="result-group-one">
-              <p className="option-text">{optionOne.text}</p> 
+              <div className="option-text">
+                {optionOne.text}
+                {
+                  isOptionOneSelected
+                  ? <MdStar color="#d79922"/>
+                  : <div></div>
+                }                
+              </div>
               <ProgressBar className="result-bar" now={firstVotePercentage} label={`${firstVotePercentage}%`} />
               <p className="text-center">{firstVoteNumber} of {totalVoteNumber} </p>  
             </div>
             <div className="result-group-two">
-              <p className="option-text">{optionTwo.text}</p>
+              <div className="option-text">
+                {optionTwo.text}
+                {
+                  isOptionOneSelected
+                  ? <div></div> 
+                  : <MdStar color="#d79922"/>
+                }
+              </div>
               <ProgressBar className="result-bar" now={secondVotePercentage} label={`${secondVotePercentage}%`} />
               <p className="text-center">{secondVoteNumber} of {totalVoteNumber} </p> 
             </div>
           </div>
         </div>
       </div>
-      </Link>
     )
   }
 }

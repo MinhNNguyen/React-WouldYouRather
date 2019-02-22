@@ -11,7 +11,6 @@ import Navigation from './Navigation'
 import SignOut from './Signout'
 import QuestionPage from './QuestionPage'
 
-
 class App extends Component {
 
   componentDidMount() {
