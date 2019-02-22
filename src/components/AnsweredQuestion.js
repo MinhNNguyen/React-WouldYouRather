@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion, formatDate } from '../utils/helpers'
+import ProgressBar from 'react-bootstrap/ProgressBar'
+import { withRouter, Link } from 'react-router-dom'
 
 class AnsweredQuestion extends Component {
   render() {
@@ -17,29 +19,41 @@ class AnsweredQuestion extends Component {
     const secondVoteNumber = optionTwo.votes.length 
       ? optionTwo.votes.length
       : 0
-    const totalVoteNumber = firstVoteNumber + secondVoteNumber 
+    const totalVoteNumber = firstVoteNumber + secondVoteNumber
+    const firstVotePercentage = parseFloat(100 * firstVoteNumber / totalVoteNumber).toFixed(2)
+    const secondVotePercentage = parseFloat(100 * secondVoteNumber / totalVoteNumber).toFixed(2)
 
     return (
-      <div className="question">
-        <div className="question-header">   
-          <img 
-            src={avatar}
-            alt={`Avatar of ${name}`}
-            className='avatar'
-          />
-          <div className="header-info">
-            <span>{name} ask:</span>
-            <div>{formatDate(timestamp)}</div> 
+      <Link className="question-link" to={`/question/${id}`}>
+      <div>
+        <div className="card card-question my-2">
+          <div className="card-body">
+            <h5 className="card-title">Result for</h5>
+            <div className="question-header"> 
+              <img 
+                src={avatar}
+                alt={`Avatar of ${name}`}
+                className='avatar'
+              />
+              <div className="header-info">
+                <span>{name}'s question</span>
+                <div>at {formatDate(timestamp)}</div> 
+              </div>
+            </div>
+            <div className="result-group-one">
+              <p className="option-text">{optionOne.text}</p> 
+              <ProgressBar className="result-bar" now={firstVotePercentage} label={`${firstVotePercentage}%`} />
+              <p className="text-center">{firstVoteNumber} of {totalVoteNumber} </p>  
+            </div>
+            <div className="result-group-two">
+              <p className="option-text">{optionTwo.text}</p>
+              <ProgressBar className="result-bar" now={secondVotePercentage} label={`${secondVotePercentage}%`} />
+              <p className="text-center">{secondVoteNumber} of {totalVoteNumber} </p> 
+            </div>
           </div>
         </div>
-        <div className='question-body'>
-          <h3>Results:</h3>
-          {optionOne.text} <br />
-          {firstVoteNumber} of {totalVoteNumber} <br />
-          {optionTwo.text} <br />
-          {secondVoteNumber} of {totalVoteNumber} <br />
-        </div>
       </div>
+      </Link>
     )
   }
 }
@@ -54,4 +68,4 @@ function mapStateToProps({authedUser, users, questions}, { id }) {
   }
 }
 
-export default connect(mapStateToProps)(AnsweredQuestion)
+export default withRouter(connect(mapStateToProps)(AnsweredQuestion))

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
-
+import { Redirect } from 'react-router-dom'
+import { Button, Form } from 'react-bootstrap'
 
 class NewQuestion extends Component {
+  
   state = {
     optionOne: '',
     optionTwo: '',
@@ -15,7 +17,8 @@ class NewQuestion extends Component {
     if (e.target.id === 'optionOne') {
       this.setState(() => ({
         ...this.state,
-        optionOne: text
+        optionOne: text,
+
       }))
     }
     else {
@@ -42,39 +45,44 @@ class NewQuestion extends Component {
 
   render() {
 
-    const { optionOne, optionTwo } = this.state
+    const { optionOne, optionTwo, toHome } = this.state
+
+    if (toHome === true) {
+      return <Redirect to='/' />
+    }
 
     return (
-      <div className="question">
-        <div>
-          <h2>
-            Create New Question
-          </h2>
-        </div>
-        <div>
-          <form className='new-question' onSubmit={this.handleSubmit}>
-            <h4>Would you rather ...</h4>
-            <input
-              id="optionOne"
-              className="option"
-              type="text"
-              value={optionOne}
-              onChange={this.handleChange}
-               />
-            <p>OR</p>
-            <input
-              id="optionTwo"
-              className="option"
-              type="text"
-              value={optionTwo}
-              onChange={this.handleChange}
-              />
-            <button 
-              type="submit"
-              disabled={optionOne === '' || optionTwo === ''}>
-              Submit
-            </button>
-          </form>
+      <div className="col-sm-11 col-md-9 col-lg-7 mx-auto">
+        <div className="card card-question my-3">
+          <div className="card-body">
+            <div className="question-header">
+            </div>
+            <h4 className="card-title text-center">Would you rather ...</h4>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Option One"
+                id="optionOne"
+                value={optionOne}
+                onChange={this.handleChange} />
+              <hr className="my-4"/>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Option Two"
+                id="optionTwo"
+                value={optionTwo}
+                onChange={this.handleChange} />
+              <Button 
+                type="submit"
+                className="new-question-button"
+                variant="btn btn-lg btn-primary btn-block text-uppercase"
+                disabled={optionOne === '' || optionTwo === ''}>
+                Create New Question
+              </Button>
+            </Form> 
+          </div>
         </div>
       </div>
     )

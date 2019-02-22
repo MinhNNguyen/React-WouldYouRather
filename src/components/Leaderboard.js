@@ -5,8 +5,8 @@ import User from './User'
 class Leaderboard extends Component {
   render() {
     return (
-      <div>
-        <h3>Leaderboard</h3>
+      <div className="col-sm-11 col-md-9 col-lg-7 mx-auto">
+        <h2 className="text-center">Leaderboard</h2>
         <ul>
           {
             this.props.usersId.map((id) => (

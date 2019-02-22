@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Container, Row, Col } from 'react-bootstrap'
 
 class User extends Component {
   render() {
@@ -15,15 +16,38 @@ class User extends Component {
     const score  = answered + created
     
     return (
-      <div>
-        {name} <br />
-        Questions Answered: {answered} <br />
-        Questions Created: {created} <br />
-        Score: {score}
+      <div className="card card-question my-2 user-card">
+        <Container>
+          <Row>
+            <Col className="col-user-card">
+              <img 
+                src={user.avatarURL}
+                alt={`Avatar of ${name}`}
+                className="user-avatar"
+              />
+            </Col>
+            <Col  className="col-user-card" xs="6">
+              <h4 className=" card-title text-center">{name}</h4>
+                Questions Answered: {answered}
+                <hr className="my-2"/>
+                Questions Created: {created}
+            </Col>
+            <Col>
+              <h4 className="text-center">Score</h4>
+              <div className="user-score text-center">
+                <p>
+                  {score}
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     )
   }
 }
+
+
 
 function mapStateToProps({authedUser, users}, { id }) {
   const user = users[id]

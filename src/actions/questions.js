@@ -1,6 +1,6 @@
 import { saveQuestion, saveQuestionAnswer } from '../utils/api'
 import { showLoading, hideLoading} from  'react-redux-loading'
-import { addAnsweredQuestion } from './users'
+import { addAnsweredQuestion, addQuestionCreated } from './users'
 
 export const ANSWER_QUESTION = 'ANSWER_QUESTION'
 export const ADD_QUESTION = 'ADD_QUESTION'
@@ -25,6 +25,7 @@ export function handleAddQuestion (optionOne, optionTwo) {
       optionTwoText: optionTwo
     })
       .then((question) => dispatch(addQuestion(question)))
+      .then((question) => dispatch(addQuestionCreated(question, authedUser)))
       .then(() => dispatch(hideLoading()))
       // Add question to the createQuestion under user as well
   } 
