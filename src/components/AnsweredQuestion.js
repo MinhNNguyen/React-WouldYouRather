@@ -4,10 +4,11 @@ import { formatQuestion, formatDate } from '../utils/helpers'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import { withRouter, Link } from 'react-router-dom'
 import { MdStar } from 'react-icons/md'
+import { FiExternalLink, FiMinimize2 } from 'react-icons/fi'
 
 class AnsweredQuestion extends Component {
   render() {
-    const { question, authedUser } = this.props
+    const { question, authedUser, mode } = this.props
 
     if (question === null) {
       return <p> This question does not exist </p>
@@ -29,6 +30,17 @@ class AnsweredQuestion extends Component {
     return (
       <div>
         <div className="card card-question my-2">
+          <div className="maximize-div">
+            {
+              mode === 'max'
+                ? <Link to='/home'>
+                    <FiMinimize2 className="maximize-icon" />
+                  </Link>
+                : <Link to={`/question/${id}`}>
+                    <FiExternalLink className="maximize-icon" />
+                  </Link>
+            }
+          </div>
           <div className="card-body">
             <h5 className="card-title">Result for</h5>
             <div className="question-header"> 
@@ -39,9 +51,7 @@ class AnsweredQuestion extends Component {
               />
               <div className="header-info">
                 <span>
-                  <Link className="question-link" to={`/question/${id}`}>
-                    {name}'s question
-                  </Link>
+                  {name}'s question
                 </span>
                 <div>at {formatDate(timestamp)}</div> 
               </div>
@@ -77,10 +87,11 @@ class AnsweredQuestion extends Component {
   }
 }
 
-function mapStateToProps({authedUser, users, questions}, { id }) {
+function mapStateToProps({authedUser, users, questions}, { id, mode }) {
   const question = questions[id]
   return {
     authedUser,
+    mode,
     question: question
       ? formatQuestion(question, users[question.author])
       : null

@@ -10,8 +10,8 @@ class QuestionPage extends Component {
     return (
       <div className="col-sm-11 col-md-9 col-lg-7 mx-auto dashboard">
         { isAnswered === true
-            ? <AnsweredQuestion id={id}/>
-            : <UnansweredQuestion id={id}/>}
+            ? <AnsweredQuestion id={id} mode='max' />
+            : <UnansweredQuestion id={id} mode='max'/>}
       </div>
     )
   }

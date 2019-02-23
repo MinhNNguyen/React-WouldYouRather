@@ -12,12 +12,20 @@ import SignOut from './Signout'
 import QuestionPage from './QuestionPage'
 
 class App extends Component {
+  state = {
+    hasError: false
+  }
 
   componentDidMount() {
     this.props.dispatch(handleInitialData())
   }
 
+  componentDidCatch(error, info) {
+    this.setState({ hasError: true })
+  }
+
   render() {
+
     return (
       <Router>
         <Fragment>
@@ -27,9 +35,9 @@ class App extends Component {
             ? null
             : <div>
                 <Navigation />
-                <Route path='/signin' exact component={SignInPage} />
+                <Route path='/' exact component={SignInPage} />
                 <Route path='/signout' exact component={SignOut} />
-                <Route path='/' exact component={Dashboard} />
+                <Route path='/home' exact component={Dashboard} />
                 <Route path='/new' exact component={NewQuestion} />
                 <Route path='/question/:id' component={QuestionPage} />
                 <Route path='/leaderboard' exact component={Leaderboard} />

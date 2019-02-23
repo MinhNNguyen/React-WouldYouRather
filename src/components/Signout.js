@@ -10,7 +10,7 @@ class SignOut extends Component {
 
   render() {
     return (
-      <Redirect to='/signin' />
+      <Redirect to='/' />
     )
   }
 }

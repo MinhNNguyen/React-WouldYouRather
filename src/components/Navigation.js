@@ -7,15 +7,15 @@ class Navigation extends Component {
   render() {
     const { loggedUser } = this.props
 
-    if ( this.props.location.pathname === '/signin') {
+    if ( this.props.location.pathname === '/') {
       return <div></div>
     }
-    
+     
     return (
       <div className="app-nav"> 
         <NavLink 
           className="app-nav-item" 
-          to="/">
+          to="/home">
           Home
         </NavLink>
         <NavLink 

@@ -33,7 +33,7 @@ class SignInPage extends Component {
     const { selectedOption, toHome } = this.state
     const { users } = this.props
     if ( toHome === true) {
-      return <Redirect to='/' />
+      return <Redirect to='/home' />
     }
 
     return (

@@ -9,7 +9,7 @@ class AnsweredQuestionPage extends Component {
       {
         this.props.answered_questionIds.map((id) => (
           <li key={id}>
-            <AnsweredQuestion id={id} />
+            <AnsweredQuestion id={id} mode='min' />
           </li>
         ))
       }

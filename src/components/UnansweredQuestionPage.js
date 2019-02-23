@@ -9,7 +9,7 @@ class UnansweredQuestionPage extends Component {
         {
           this.props.unanswered_questionIds.map((id) => (
             <li key={id}>
-              <UnansweredQuestion id={id} />
+              <UnansweredQuestion id={id} mode='min' />
             </li>
           ))
         }

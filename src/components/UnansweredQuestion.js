@@ -4,6 +4,7 @@ import { formatQuestion, formatDate } from '../utils/helpers'
 import { handleAnswerQuestion } from '../actions/questions'
 import { Button, Form } from 'react-bootstrap'
 import { withRouter, Link } from 'react-router-dom'
+import { FiExternalLink, FiMinimize2 } from 'react-icons/fi'
 
 class UnansweredQuestion extends Component {
 
@@ -32,7 +33,7 @@ class UnansweredQuestion extends Component {
   }
 
   render() {
-    const { question } = this.props
+    const { question, mode } = this.props
     const { selectedOption } = this.state
 
     if (question === null) {
@@ -44,6 +45,17 @@ class UnansweredQuestion extends Component {
     return (
         <div>
           <div className="card card-question my-2">
+            <div className="maximize-div">
+              {
+                mode === 'max'
+                  ? <Link to='/home'>
+                      <FiMinimize2 className="maximize-icon" />
+                    </Link>
+                  : <Link to={`/question/${id}`}>
+                      <FiExternalLink className="maximize-icon" />
+                    </Link>
+              }
+            </div>
             <div className="card-body">
               <div className="question-header"> 
                 <img 
@@ -53,9 +65,7 @@ class UnansweredQuestion extends Component {
                 />
                 <div className="header-info">
                   <span>
-                    <Link className="question-link" to={`/question/${id}`}>
-                      {name}'s question
-                    </Link>
+                    {name}'s question
                   </span>
                   <div>at {formatDate(timestamp)}</div> 
                 </div>
@@ -93,10 +103,11 @@ class UnansweredQuestion extends Component {
   }
 }
 
-function mapStateToProps({authedUser, users, questions}, { id }) {
+function mapStateToProps({authedUser, users, questions}, { id, mode }) {
   const question = questions[id]
   return {
     authedUser,
+    mode,
     question: question
       ? formatQuestion(question, users[question.author])
       : null
