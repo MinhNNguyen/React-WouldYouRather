@@ -27,17 +27,17 @@ It correctly bundles React in production mode and optimizes the build for the be
 If you aren’t satisfied with the build tool and configuration choices, you can eject at any time. This command will remove the single build dependency from your project. <br>
 ## Built with
 
-    "jquery": "^3.3.1", <br>
-    "popper.js": "^1.14.7", <br>
-    "react": "^16.8.1", <br>
-    "react-bootstrap": "^1.0.0-beta.5", <br>
-    "react-dom": "^16.8.1", <br>
-    "react-icons": "^3.4.0", <br>
-    "react-redux": "^6.0.0", <br>
-    "react-redux-loading": "^1.0.1", <br>
-    "react-router-dom": "^4.3.1", <br> 
-    "react-scripts": "2.1.5", <br>
-    "redux": "^4.0.1", <br>
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7",
+    "react": "^16.8.1",
+    "react-bootstrap": "^1.0.0-beta.5",
+    "react-dom": "^16.8.1",
+    "react-icons": "^3.4.0", 
+    "react-redux": "^6.0.0",
+    "react-redux-loading": "^1.0.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.5",
+    "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
 
 ## Reference
