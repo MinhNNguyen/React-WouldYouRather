@@ -27,7 +27,6 @@ export function handleAddQuestion (optionOne, optionTwo) {
       .then((question) => dispatch(addQuestion(question)))
       .then((question) => dispatch(addQuestionCreated(question, authedUser)))
       .then(() => dispatch(hideLoading()))
-      // Add question to the createQuestion under user as well
   } 
 }
 

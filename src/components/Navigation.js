@@ -7,7 +7,8 @@ class Navigation extends Component {
   render() {
     const { loggedUser } = this.props
 
-    if ( this.props.location.pathname === '/') {
+    if ( this.props.location.pathname === '/'
+        || this.props.location.pathname === '/signup' ) {
       return <div></div>
     }
      

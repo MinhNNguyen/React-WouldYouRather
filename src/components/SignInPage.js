@@ -8,7 +8,8 @@ class SignInPage extends Component {
 
   state = {
     selectedOption: this.props.usernames[0],
-    toHome: false
+    toHome: false,
+    toSignUpPage: false
   }
 
   handleChange = (e) => {
@@ -25,16 +26,30 @@ class SignInPage extends Component {
     dispatch(handleSignIn(selectedOption))
     this.setState(() =>({
       selectedOption: '',
+      toSignUpPage: false,
       toHome: true
     }))
   }
 
+  goToSignUp = (e) => {
+    e.preventDefault()
+    this.setState(() => ({
+      selectedOption: '',
+      toHome: false,
+      toSignUpPage: true
+    }))
+  }
+
   render() {
-    const { selectedOption, toHome } = this.state
+    const { selectedOption, toHome, toSignUpPage } = this.state
     const { users } = this.props
     if ( toHome === true) {
       return <Redirect to='/home' />
     }
+    if ( toSignUpPage === true) {
+      return <Redirect to='/signup' />
+    }
+
 
     return (
       <div className="container">
@@ -69,6 +84,12 @@ class SignInPage extends Component {
                     variant="btn btn-lg btn-primary btn-block text-uppercase"
                     type="submit">
                     Login
+                  </Button>
+                  <Button
+                    variant="btn btn-lg btn-primary btn-block text-uppercase"
+                    href="/signup"
+                    onClick={this.goToSignUp}>
+                    Sign Up
                   </Button>
                 </form>
               </div>

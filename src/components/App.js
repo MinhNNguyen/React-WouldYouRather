@@ -10,6 +10,7 @@ import LoadingBar from 'react-redux-loading'
 import Navigation from './Navigation'
 import SignOut from './Signout'
 import QuestionPage from './QuestionPage'
+import SignUpPage from './SignUpPage'
 
 class App extends Component {
   state = {
@@ -39,8 +40,9 @@ class App extends Component {
                 <Route path='/signout' exact component={SignOut} />
                 <Route path='/home' exact component={Dashboard} />
                 <Route path='/new' exact component={NewQuestion} />
-                <Route path='/question/:id' component={QuestionPage} />
+                <Route path='/question/:id' exact component={QuestionPage} />
                 <Route path='/leaderboard' exact component={Leaderboard} />
+                <Route path='/signup' exact component={SignUpPage} />
               </div>
             }
           </div>

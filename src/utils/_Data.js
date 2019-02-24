@@ -125,6 +125,37 @@ export function _getUsers () {
   })
 }
 
+function formatUser ({ username, name, avatarURL}) {
+  return {
+    answers: {},
+    avatarURL: avatarURL,
+    id: username,
+    name: name,
+    questions: []
+  }
+}
+
+export function _saveUser(user) {
+  return new Promise((res, rej) => {
+    const formattedUser= formatUser(user)
+
+    console.log(formattedUser)
+
+    setTimeout(() => {
+      questions = {
+        ...questions
+      }
+
+      users = {
+        ...users,
+        [formattedUser.id]: formattedUser
+      }
+
+      res(formattedUser)
+    }, 1000)
+  })
+}
+
 export function _getQuestions () {
   return new Promise((res, rej) => {
     setTimeout(() => res({...questions}), 1000)

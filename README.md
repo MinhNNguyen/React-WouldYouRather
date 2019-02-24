@@ -43,6 +43,7 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 ## Reference
 
 [Create React App](https://github.com/facebook/create-react-app) <br>
+[Authentication Fixing]https://tylermcginnis.com/react-router-handling-404-pages/ <br>
 
 ##Author
 
