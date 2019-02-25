@@ -2,6 +2,8 @@
 
 A responsive React/Redux web application that allow user to play Would You Rather game. The user can sign in, adding new question, answering question and viewing total number of questions they created and answered.
 
+[Demo URL](https://minhnnguyen.github.io/React-WouldYouRather/)<br>
+
 ## Configuration
 
 The project is built with Create React App. To start off the project, install all the dependencies using ```npm install```. Relocate to inside the project and run ```npm start``` <br>
